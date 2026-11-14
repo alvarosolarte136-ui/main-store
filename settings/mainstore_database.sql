@@ -19,4 +19,6 @@ SELECT * FROM users;
 --Insert a nwe user into users table
 INSERT INTO users (firstname, lastname, ident_number, email, password) VALUES ('Joan', 'Ayala', '108890988','sebas@gmail.com', 
 '123456');
+--Para añadir columna
+ALTER TABLE users ADD COLUMN url_photo TEXT;
 
