@@ -31,6 +31,10 @@ $sql="
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body>
+        <select>
+            <option>List all users</option>
+            <option>List active users only</option>
+        </select>
         <table  class="table table-bordered">
             <tr>
                 <th>Photo</th>
@@ -44,14 +48,19 @@ $sql="
             <tr>
                 <!-- Here print data from database -->
                 <td>
-                    <img src="<?= $row['url_photo'] ?>" width="40" alt="user photo profile">
+                    <?php if (!empty($row['url_photo'])) { ?>
+                        <img src="<?= $row['url_photo'] ?>" width="40" height="40" style="object-fit: cover; border-radius: 50%;" alt="user photo profile">
+                    <?php } else { ?>
+                    <!-- Imagen por defecto si no tiene foto -->
+                        <img src="photos/photo_default.png" width="40" height="40" style="object-fit: cover; border-radius: 50%;" alt="default photo">
+                    <?php } ?>
                 </td>
-                <td>><?= $row['fullname'] ?></td>
+                <td><?= $row['fullname'] ?></td>
                 <td><?= $row['email'] ?></td>
                 <td><?= $row['mobile_phone'] ?></td>
                 <td><?= $row['status'] ?></td>
                 <td align="center">
-                    <a href="#">
+                    <a href="edit_user.php?id=<?php echo $row['id']; ?>">
                         <img src="icon/edit.png" alt="Edit user" width="20">
                     </a> 
                     <a href="#">
@@ -60,9 +69,19 @@ $sql="
                     <a href="delete_user.php?userID=<?= $row['id'] ?>">
                         <img src="icon/delete.png" alt="Delete user" width="20">
                     </a>
+                    <a href="update_user_status.php?userID=<?= $row['id'] ?>&userStatus=<?= $row['status'] ?>">
+                        <?php
+                            if($row['status'] == 'Active'){
+                                echo "<img src='icon/disable.png' alt='Inactive user' width='20'>";
+                            }else{
+                                echo "<img src='icon/enable.png' alt='Active user' width='20'>";
+                            }
+                        ?>
+                    </a>
                 </td> 
             </tr>
         <?php } ?>
         </table>
+        <a href="home.php">Go to home</a>
     </body>
 </html>
