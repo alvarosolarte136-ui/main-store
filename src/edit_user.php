@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (($_SESSION['rol'] ?? 'cliente') !== 'administrador') {
+    http_response_code(403);
+    exit("Acceso denegado: solo el rol administrador puede editar.");
+}
+
 include('../settings/database.php');
 
 $id = $_GET['id'];   // el número que llegó en la URL
@@ -12,6 +18,7 @@ $user = pg_fetch_assoc($result);   // una sola fila: el usuario a editar
 <head>
     <meta charset="UTF-8">
     <title>Editar usuario</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <h1>Editar usuario</h1>

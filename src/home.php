@@ -5,7 +5,7 @@ if (!isset($_SESSION['user_id'])) {
 } else {
     header('refresh:0;url=home.php');
 }
- 
+
 include('../settings/database.php');
 ?>
 <!DOCTYPE html>
@@ -13,7 +13,8 @@ include('../settings/database.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <center>
